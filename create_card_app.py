@@ -8,8 +8,17 @@ app = marimo.App(width="medium")
 def __():
     import marimo as mo
     from PIL import Image, ImageDraw, ImageFont
+    from loguru import logger
     from io import BytesIO
-    return BytesIO, Image, ImageDraw, ImageFont, mo
+    return BytesIO, Image, ImageDraw, ImageFont, logger, mo
+
+
+@app.cell
+def __(logger):
+    logger.remove()
+    log = logger.add("logfile.log")
+    logger.info('created')
+    return (log,)
 
 
 @app.cell
@@ -77,10 +86,11 @@ def __(mo):
 
 
 @app.cell
-def __(BytesIO, img):
+def __(BytesIO, fullname, img, logger):
     def image_png_bytes():
         file = BytesIO()
         img.save(file, format='PNG')
+        logger.info(f"{fullname.value} download")
         return file
     return (image_png_bytes,)
 
