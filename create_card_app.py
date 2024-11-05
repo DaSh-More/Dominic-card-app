@@ -12,29 +12,34 @@ def __():
     return BytesIO, Image, ImageDraw, ImageFont, mo
 
 
-app._unparsable_cell(
-    r"""
+@app.cell
+def __(
+    birthday,
+    card_id,
+    fullname,
+    img,
+    mo,
+    photo,
+    photo_img,
+    register_date,
+    result_downloader,
+    sex,
+):
     mo.vstack(
         [
             mo.hstack(
                 [
                     mo.vstack(
                         [
-                            mo.hstack([\"Имя Фамилия:\", fullname], justify=\"start\"),
-                            mo.hstack([\"CARD NO.:\", card_id], justify=\"start\"),
+                            mo.hstack(["Имя Фамилия:", fullname]),
+                            mo.hstack(["CARD NO.:", card_id]),
+                            mo.hstack(["Дата рождения:", birthday]),
+                            mo.hstack(["Дата регистрации карты:", register_date]),
                             mo.hstack(
-                                [\"Дата рождения:\", birthday], justify=\"start\"
+                                ["Пол:", sex, ("Мужчина", "Женщина")[sex.value]],
+                                justify="start",
                             ),
-                            mo.hstack(
-                                [\"Дата регистрации карты:\", register_date],
-                                justify=\"start\",
-                                mo.ui.
-                            ),
-                            mo.hstack(
-                                [\"Пол:\", sex, (\"Мужчина\", \"Женщина\")[sex.value]],
-                                justify=\"start\",
-                            ),
-                            mo.hstack([\"Upload photo\", photo], justify=\"start\"),
+                            mo.hstack(["Upload photo", photo], justify="start"),
                             photo_img,
                         ]
                     ),
@@ -44,9 +49,7 @@ app._unparsable_cell(
             mo.right(result_downloader),
         ],
     )
-    """,
-    name="__"
-)
+    return
 
 
 @app.cell
