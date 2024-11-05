@@ -1,0 +1,6 @@
+[display]
+code_editor_font_size = 14
+cell_output = "below"
+dataframes = "rich"
+default_width = "medium"
+theme = "dark"
