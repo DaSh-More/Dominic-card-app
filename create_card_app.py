@@ -44,7 +44,8 @@ def __(
                         ]
                     ),
                     img,
-                ]
+                ],
+                wrap=True,
             ),
             mo.right(result_downloader),
         ],
